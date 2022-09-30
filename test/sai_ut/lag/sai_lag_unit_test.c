@@ -32,6 +32,8 @@ int main()
     sai_switch_notification_t notifications;
     sai_object_id_t           port_list[64];
 
+    sai_attribute_t     attr;
+
     status = sai_api_initialize(0, &test_services);
 
     status = sai_api_query(SAI_API_SWITCH, (void**)&switch_api);
@@ -130,14 +132,14 @@ int main()
 
     // GET LAG MEMBER
     attrs[0].id = SAI_LAG_MEMBER_ATTR_LAG_ID;
-    status = lag_api->get_lag_member_attribute(lag_member_oid[0], 2, attrs);
+    status = lag_api->get_lag_member_attribute(lag_member_oid[0], 1, attrs);
     if (status != SAI_STATUS_SUCCESS) {
         printf("Failed to get a LAG_MEMBER_ATTRIBUTE, status=%d\n", status);
         return 1;
     }
 
     attrs[0].id = SAI_LAG_MEMBER_ATTR_PORT_ID;
-    status = lag_api->get_lag_member_attribute(lag_member_oid[2], 2, attrs);
+    status = lag_api->get_lag_member_attribute(lag_member_oid[2], 1, attrs);
     if (status != SAI_STATUS_SUCCESS) {
         printf("Failed to get a LAG_MEMBER_ATTRIBUTE, status=%d\n", status);
         return 1;
